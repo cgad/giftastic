@@ -1,0 +1,13 @@
+#addBox {
+    width: 20%;
+}
+
+#submit {
+    margin-top: 10px;
+}
+
+button {
+    margin: 5px 0 5px 5px;
+    background-color: rgb(150, 240, 189);
+    border: none;
+}
