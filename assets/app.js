@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    // for saves
+    var numFavs = 0;
 
     // already 5 food buttons on page load
     var search = ["mushroom","donut","cheeseburger","pizza","sushi"];
@@ -32,7 +34,10 @@ $(document).ready(function() {
                 var foodDiv = $("<div class='food-div'>");
                 var p = $("<p class='rating'>").text("rating: " + results[i].rating);
                 var foodGif = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
-                var favorite = $("<p class='fav'>").text("favorite").attr("fav", "no");
+                // var favorite = $("<p class='fav'>").text("favorite").attr("fav", "no");
+
+                // work in progress: local storage of favorites
+                var favorite = $("<p class='fav'>").text("favorite").attr("data-fav", "no").attr("data-favurl", results[i].images.fixed_height.url);
 
                 foodDiv.append(p, foodGif, favorite);
                 $("#search-results").prepend(foodDiv);
@@ -49,15 +54,44 @@ $(document).ready(function() {
             }) 
 
             $(".food-div").on("click", ".fav", function(event) {
-                var fav = $(this).attr("fav");
+                var fav = $(this).attr("data-fav");
+                var savedArray = [];
+
                 if (fav == "no") {
                     var favImg = $("<img>").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6WsIXigOo3FMZE4J9F-DZ8mU05K8Fgyn_daXjblQk9QNo_eeR").addClass("imgSize");
-                    favorite.append(favImg);
-                    $(this).attr("fav", "yes");
+                    $(this).append(favImg).attr("data-fav", "yes");
+                    numFavs++;
+                    $("#saved").append("<img class='small' src=" + $(this).attr("data-favurl") + ">");
                 } else {
-                    favorite.text("favorite");
-                    $(this).attr("fav", "no");
+                    $(this).text("favorite").attr("data-fav", "no");
+                    numFavs--;
                 }
+                $("#numFavs").text(numFavs);
+
+                // push OBJECT to saved array, url and unique identifier (from giphy object?)
+                // for loop to print out images
+                // edit array, then go through for loop for deletions
+                // can i find an object in an array by a particular key
+                // 
+                // on click of big image favorite, grab attribute of name of little image, to unfavorite, grab value, find indexof(favorited image) in that array, splice to remove that index, then clear favorites div and reloop through
+                //
+                // var newSave;
+                // if (fav == "no") {
+                //     var favImg = $("<img>").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6WsIXigOo3FMZE4J9F-DZ8mU05K8Fgyn_daXjblQk9QNo_eeR").addClass("imgSize");
+                //     $(this).append(favImg).attr("data-fav", "yes");
+                //     numFavs++;
+                    
+
+                //     // newSave = "<img class='small' src=" + $(this).attr("favurl") + ">";
+                //     newSave = $(this).attr("data-favurl");
+                //     savedArray.push(newSave);
+                //     console.log(savedArray);
+                //     // $("#saved").prepend("<img class='small' src=" + $(this).attr("favurl") + ">");
+                // } else {
+                //     $(this).text("favorite").attr("data-fav", "no");
+                //     numFavs--;
+                // }
+
             });
 
         })

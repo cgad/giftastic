@@ -13,7 +13,7 @@ h4 {
 }
 
 h6 {
-    margin: 10px 0;
+    margin: 10px 0 10px 0;
     font-weight: 400;
     font-size: 14px;
 }
@@ -42,12 +42,14 @@ p {
 
 img {
     max-width: 300px;
+    height: 200px;
 }
 
 .food-div {
     float: left;
     margin-right: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    height: 260px;
 }
 
 .imgSize {
@@ -59,4 +61,20 @@ img {
     margin-top: 3px;
     font-weight: 300;
     font-size: 14px;
+}
+
+.fav {
+    line-height: 20px;
+    height: 40px;
+}
+
+.small {
+    height: 30px;
+    width: 30px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}
+
+#saved {
+    margin-bottom: 20px;
 }
