@@ -1,13 +1,41 @@
-#addBox {
-    width: 20%;
+clearfix::after {
+    content: “”;
+    display: block;
+    clear: both;
 }
+
+body {
+    padding: 10px;
+}
+
+/* #addBox {
+    width: 100%;
+} */
 
 #submit {
     margin-top: 10px;
 }
 
 button {
-    margin: 5px 0 5px 5px;
     background-color: rgb(150, 240, 189);
     border: none;
 }
+
+.item {
+    margin: 0 10px 10px 0;
+}
+
+p {
+    margin-top: 16px;
+    margin-bottom: 2px;
+}
+
+img {
+    max-width: 300px;
+}
+
+.food-div {
+    float: left;
+    margin-right: 30px;
+}
+
