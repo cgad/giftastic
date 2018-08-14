@@ -30,7 +30,7 @@ $(document).ready(function() {
             var results = response.data;
             for (var i = 0; i < 10; i++) {
                 var foodDiv = $("<div class='food-div'>");
-                var p = $("<p>").text("Rating: " + results[i].rating);
+                var p = $("<p class='rating'>").text("rating: " + results[i].rating);
                 var foodGif = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
                 var favorite = $("<p class='fav'>").text("favorite").attr("fav", "no");
 

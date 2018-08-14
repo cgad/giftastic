@@ -14,8 +14,8 @@ h4 {
 
 h6 {
     margin: 10px 0;
-    font-weight: 300;
-    font-size: 12px;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 #addBox {
@@ -47,6 +47,7 @@ img {
 .food-div {
     float: left;
     margin-right: 30px;
+    margin-bottom: 20px;
 }
 
 .imgSize {
@@ -54,6 +55,8 @@ img {
     width: 20px;
 }
 
-.fav {
+.fav, .rating {
     margin-top: 3px;
+    font-weight: 300;
+    font-size: 14px;
 }
