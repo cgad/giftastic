@@ -12,8 +12,14 @@ h4 {
     margin-bottom: 15px;
 }
 
+h6 {
+    margin: 10px 0;
+    font-weight: 300;
+    font-size: 12px;
+}
+
 #addBox {
-    max-width: 300px;
+    max-width: 250px;
 }
 
 #submit {
