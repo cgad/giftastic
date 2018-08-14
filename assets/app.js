@@ -8,14 +8,16 @@ $(document).ready(function() {
         $("#search-buttons").append(newButton);
     }
 
-    // click event for submit button: save user input, clear field, add new button
+    // click event for submit button: save user input, clear field, add new button if the field wasn't blank
     $("#submit").on("click", function(event) {
         event.preventDefault();
         var userSearch = $("#add").val().trim().toLowerCase();
         $("#add").val("");
-        var newButton = $("<button class='item'>").text(userSearch);
-        newButton.attr("data-food", userSearch);
-        $("#search-buttons").append(newButton);           
+        if (userSearch != "") {
+            var newButton = $("<button class='item'>").text(userSearch);
+            newButton.attr("data-food", userSearch);
+            $("#search-buttons").append(newButton);  
+        }    
     })
 
     // click event for food buttons: save button food, create query URL, call ajax, create new div to hold rating and gif image, create p for rating, img for gif image, give img still and animated (gif) values, add to page
