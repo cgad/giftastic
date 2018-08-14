@@ -32,8 +32,9 @@ $(document).ready(function() {
                 var foodDiv = $("<div class='food-div'>");
                 var p = $("<p>").text("Rating: " + results[i].rating);
                 var foodGif = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
+                var favorite = $("<p class='fav'>").text("favorite").attr("fav", "no");
 
-                foodDiv.append(p, foodGif);
+                foodDiv.append(p, foodGif, favorite);
                 $("#search-results").prepend(foodDiv);
             }
 
@@ -46,6 +47,16 @@ $(document).ready(function() {
                     $(this).attr("src", $(this).attr("data-gif")).attr("data-state", "gif");
                 }
             }) 
+
+            $(".food-div").on("click", ".fav", function(event) {
+                var fav = $(this).attr("fav");
+                if (fav == "no") {
+                    var favImg = $("<img>").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6WsIXigOo3FMZE4J9F-DZ8mU05K8Fgyn_daXjblQk9QNo_eeR").addClass("imgSize");
+                    favorite.append(favImg);
+                    $(this).attr("fav", "yes");
+                }
+            });
+
         })
     })
 

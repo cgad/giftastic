@@ -8,9 +8,13 @@ body {
     padding: 10px;
 }
 
-/* #addBox {
-    width: 100%;
-} */
+h4 {
+    margin-bottom: 15px;
+}
+
+#addBox {
+    max-width: 300px;
+}
 
 #submit {
     margin-top: 10px;
@@ -39,3 +43,11 @@ img {
     margin-right: 30px;
 }
 
+.imgSize {
+    height: 20px;
+    width: 20px;
+}
+
+.fav {
+    margin-top: 3px;
+}
