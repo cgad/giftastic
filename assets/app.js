@@ -54,6 +54,9 @@ $(document).ready(function() {
                     var favImg = $("<img>").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6WsIXigOo3FMZE4J9F-DZ8mU05K8Fgyn_daXjblQk9QNo_eeR").addClass("imgSize");
                     favorite.append(favImg);
                     $(this).attr("fav", "yes");
+                } else {
+                    favorite.text("favorite");
+                    $(this).attr("fav", "no");
                 }
             });
 
