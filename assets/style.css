@@ -6,9 +6,14 @@ clearfix::after {
 
 body {
     padding: 10px;
+    font-size: 16px;
 }
 
 h1 {
+    margin-bottom: 20px;
+}
+
+.opening {
     margin-bottom: 20px;
 }
 
@@ -69,7 +74,7 @@ img {
 .fav, .rating {
     margin-top: 3px;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .fav {
