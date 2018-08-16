@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    // for saves
+    // for number of saved gifs
     var numFavs = 0;
+    // empty array for favorited gifs
+    var savedArray = [];
 
     // already 5 food buttons on page load
     var search = ["mushroom","donut","cheeseburger","pizza","sushi"];
@@ -22,7 +24,7 @@ $(document).ready(function() {
         }    
     })
 
-    // click even t for food buttons: save button food, create query URL, call ajax, create new div to hold rating and gif image, create p for rating, img for gif image, give img still and animated (gif) values, add to page
+    // click event for food buttons: save button food, create query URL, call ajax, create new div to hold rating and gif image, create p for rating, img for gif image, give img still and animated (gif) values, add to page
     $("#search-buttons").on("click", ".item", function(event) {
         var food = $(this).attr("data-food");
         var userQuery = "https://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=RC5qajcnW04a0dwjbL8h2nVGrofeeFqg&q=" + food;
@@ -53,9 +55,7 @@ $(document).ready(function() {
                 }
             }) 
 
-            // empty array for favorited gifs
-            var savedArray = [];
-            // click event for favorites: if not saved yet, add to array and add images in array to favorites section. if already saved, remove from array, re-add array to favorites section. update number of favs
+            // click event for favorites: if not saved yet, add to array and add images in array to favorites section. if already saved, remove from array, re-add array to favorites section. update number of favs. click a mini gif to open in new window
             $(".food-div").on("click", ".fav", function(event) {
                 var favValue = $(this).attr("data-fav");
                 var favURL = $(this).attr("data-favurl")
@@ -68,7 +68,8 @@ $(document).ready(function() {
                     savedArray.push(favURL);
                     $("#saved").text("");
                     for (var i = 0; i < savedArray.length; i++) {
-                        $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
+                        $("#saved").append("<a target=_blank href=" + favURL + "><img class='small' src=" + savedArray[i] + "></a>")
+                        // $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
                     }
                 } else {
                     $(this).text("favorite").attr("data-fav", "no");
@@ -76,11 +77,12 @@ $(document).ready(function() {
                     numFavs--;
                     $("#saved").text("");
                     for (var i = 0; i < savedArray.length; i++) {
-                        $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
+                        // $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
+                        $("#saved").append("<a target=_blank href=" + favURL + "><img class='small' src=" + savedArray[i] + "></a>")
                     }
                 }
                 $("#numFavs").text(numFavs);
-            });
+            })
         })
     })
 
