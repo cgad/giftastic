@@ -1,8 +1,6 @@
 $(document).ready(function() {
     // for number of saved gifs
     var numFavs = 0;
-    // empty array for favorited gifs
-    var savedArray = [];
 
     // already 5 food buttons on page load
     var search = ["mushroom","donut","cheeseburger","pizza","sushi"];
@@ -36,7 +34,7 @@ $(document).ready(function() {
             for (var i = 0; i < 10; i++) {
                 var foodDiv = $("<div class='food-div'>");
                 var p = $("<p class='rating'>").text("rating: " + results[i].rating);
-                var foodGif = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
+                var foodGif = $("<img class='largeGif'>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
 
                 // reference these attributes later for favorite storage
                 var favorite = $("<p class='fav'>").text("favorite").attr("data-fav", "no").attr("data-favurl", results[i].images.fixed_height.url);
@@ -44,46 +42,49 @@ $(document).ready(function() {
                 foodDiv.append(p, foodGif, favorite);
                 $("#search-results").prepend(foodDiv);
             }
-
-            // click event for pausing gifs: new variable to store current data-state, change source to either still or gif state depending on current state
-            $(".food-div").on("click", "img", function(event) {
-                var state = $(this).attr("data-state");
-                if (state == "gif") {
-                    $(this).attr("src", $(this).attr("data-still")).attr("data-state", "still");
-                } else {
-                    $(this).attr("src", $(this).attr("data-gif")).attr("data-state", "gif");
-                }
-            }) 
-
-            // click event for favorites: if not saved yet, add to array and add images in array to favorites section. if already saved, remove from array, re-add array to favorites section. update number of favs. click a mini gif to open in new window
-            $(".food-div").on("click", ".fav", function(event) {
-                var favValue = $(this).attr("data-fav");
-                var favURL = $(this).attr("data-favurl")
-                var num = 0;
-
-                if (favValue == "no") {
-                    var favImg = $("<img>").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6WsIXigOo3FMZE4J9F-DZ8mU05K8Fgyn_daXjblQk9QNo_eeR").addClass("imgSize");
-                    $(this).append(favImg).attr("data-fav", "yes");
-                    numFavs++;
-                    savedArray.push(favURL);
-                    $("#saved").text("");
-                    for (var i = 0; i < savedArray.length; i++) {
-                        $("#saved").append("<a target=_blank href=" + favURL + "><img class='small' src=" + savedArray[i] + "></a>")
-                        // $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
-                    }
-                } else {
-                    $(this).text("favorite").attr("data-fav", "no");
-                    savedArray.splice(savedArray.indexOf(favURL), 1);
-                    numFavs--;
-                    $("#saved").text("");
-                    for (var i = 0; i < savedArray.length; i++) {
-                        // $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
-                        $("#saved").append("<a target=_blank href=" + favURL + "><img class='small' src=" + savedArray[i] + "></a>")
-                    }
-                }
-                $("#numFavs").text(numFavs);
-            })
         })
+    })
+
+    // click event for pausing gifs: new variable to store current data-state, change source to either still or gif state depending on current state
+    // NEED document because class .largeGif is dynamically created
+    $(document).on("click", ".largeGif", function(event) {
+        var state = $(this).attr("data-state");
+        if (state == "gif") {
+            $(this).attr("src", $(this).attr("data-still")).attr("data-state", "still");
+        } else {
+            $(this).attr("src", $(this).attr("data-gif")).attr("data-state", "gif");
+        }
+    }) 
+
+    // empty array for favorited gifs
+    var savedArray = [];
+
+    // click event for favorites: if not saved yet, add to array and add images in array to favorites section. if already saved, remove from array, re-add array to favorites section. update number of favs. click a mini gif to open in new window. use savedArray for both link url and img src
+    $(document).on("click", ".fav", function(event) {
+        var favValue = $(this).attr("data-fav");
+        var favURL = $(this).attr("data-favurl");
+        var num = 0;
+
+        if (favValue == "no") {
+            var favImg = $("<img>").attr("src", "assets/images/heart.png").addClass("imgSize");
+            $(this).append(favImg).attr("data-fav", "yes");
+            numFavs++;
+            savedArray.push(favURL);
+
+            $("#saved").text("");
+            for (var i = 0; i < savedArray.length; i++) {
+                $("#saved").append("<a target=_blank href=" + savedArray[i] + "><img class='small' src=" + savedArray[i] + "></a>")
+            }
+        } else {
+            $(this).text("favorite").attr("data-fav", "no");
+            savedArray.splice(savedArray.indexOf(favURL), 1);
+            numFavs--;
+            $("#saved").text("");
+            for (var i = 0; i < savedArray.length; i++) {
+                $("#saved").append("<a target=_blank href=" + savedArray[i] + "><img class='small' src=" + savedArray[i] + "></a>")
+            }
+        }
+        $("#numFavs").text(numFavs);
     })
 
 })
