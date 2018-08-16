@@ -36,7 +36,7 @@ $(document).ready(function() {
                 var p = $("<p class='rating'>").text("rating: " + results[i].rating);
                 var foodGif = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-gif", results[i].images.fixed_height.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-state", "gif");
 
-                // work in progress: local storage of favorites
+                // reference these attributes later for favorite storage
                 var favorite = $("<p class='fav'>").text("favorite").attr("data-fav", "no").attr("data-favurl", results[i].images.fixed_height.url);
 
                 foodDiv.append(p, foodGif, favorite);
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
             // empty array for favorited gifs
             var savedArray = [];
-            // click event for favorites: 
+            // click event for favorites: if not saved yet, add to array and add images in array to favorites section. if already saved, remove from array, re-add array to favorites section. update number of favs
             $(".food-div").on("click", ".fav", function(event) {
                 var favValue = $(this).attr("data-fav");
                 var favURL = $(this).attr("data-favurl")
@@ -66,7 +66,6 @@ $(document).ready(function() {
                     $(this).append(favImg).attr("data-fav", "yes");
                     numFavs++;
                     savedArray.push(favURL);
-                    console.log(savedArray);
                     $("#saved").text("");
                     for (var i = 0; i < savedArray.length; i++) {
                         $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
@@ -75,7 +74,6 @@ $(document).ready(function() {
                     $(this).text("favorite").attr("data-fav", "no");
                     savedArray.splice(savedArray.indexOf(favURL), 1);
                     numFavs--;
-                    console.log(savedArray);
                     $("#saved").text("");
                     for (var i = 0; i < savedArray.length; i++) {
                         $("#saved").append("<img class='small' src=" + savedArray[i] + ">")
